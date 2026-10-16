@@ -1,0 +1,39 @@
+{
+  "eyebrow": "GET IN TOUCH",
+  "titlePrefix": "Let's Build Something",
+  "titleHighlight": "Extraordinary Together",
+  "sub": "Tell us about your project, and our team will get back to you within 24 hours.",
+  "form": {
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "projectType": "Project Type",
+    "budget": "Expected Budget",
+    "details": "Project Details",
+    "submit": "Send Request via WhatsApp",
+    "submitEmail": "Send Message",
+    "sending": "Sending...",
+    "successTitle": "Your request is prepared for WhatsApp",
+    "successSub": "WhatsApp chat with Youssef will open directly now.",
+    "successTitleEmail": "Your message has been sent",
+    "successSubEmail": "We'll get back to you by email within 24 hours.",
+    "methodLabel": "How should we reach you?",
+    "methodEmail": "Email",
+    "methodWhatsapp": "WhatsApp",
+    "namePlaceholder": "Your name",
+    "messagePlaceholder": "Tell us more about your vision...",
+    "budgetPlaceholder": "e.g. 20000 (SAR, optional)",
+    "types": {
+      "website": "Website",
+      "webapp": "Web App / SaaS",
+      "ai": "AI Solutions",
+      "branding": "Branding",
+      "other": "Other"
+    }
+  },
+  "info": {
+    "emailLabel": "EMAIL",
+    "whatsappLabel": "WHATSAPP",
+    "license": "Official License",
+    "licenseValue": "FL-785655331 (Certified Freelancer)"
+  }
+}

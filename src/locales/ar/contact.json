@@ -1,0 +1,39 @@
+{
+  "eyebrow": "GET IN TOUCH",
+  "titlePrefix": "لنبنِ شيئًا",
+  "titleHighlight": "استثنائيًا معًا",
+  "sub": "أخبرنا عن مشروعك، وسيتواصل معك فريقنا خلال 24 ساعة.",
+  "form": {
+    "fullName": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "projectType": "نوع المشروع",
+    "budget": "الميزانية المتوقعة",
+    "details": "تفاصيل المشروع",
+    "submit": "أرسل الطلب عبر الواتساب",
+    "submitEmail": "إرسال الرسالة",
+    "sending": "جاري الإرسال...",
+    "successTitle": "تم تجهيز طلبك للواتساب",
+    "successSub": "سيتم فتح محادثة الواتساب مباشرة مع يوسف الآن.",
+    "successTitleEmail": "تم إرسال رسالتك",
+    "successSubEmail": "سيتواصل معك فريقنا عبر البريد الإلكتروني خلال 24 ساعة.",
+    "methodLabel": "كيف تفضل أن نتواصل معك؟",
+    "methodEmail": "البريد الإلكتروني",
+    "methodWhatsapp": "واتساب",
+    "namePlaceholder": "اسمك",
+    "messagePlaceholder": "أخبرنا المزيد عن رؤيتك...",
+    "budgetPlaceholder": "مثال: 20000 (ريال، اختياري)",
+    "types": {
+      "website": "موقع إلكتروني",
+      "webapp": "تطبيق ويب / SaaS",
+      "ai": "حلول ذكاء اصطناعي",
+      "branding": "هوية بصرية",
+      "other": "أخرى"
+    }
+  },
+  "info": {
+    "emailLabel": "EMAIL",
+    "whatsappLabel": "WHATSAPP",
+    "license": "الرخصة الرسمية",
+    "licenseValue": "FL-785655331 (عمل حر معتمد)"
+  }
+}

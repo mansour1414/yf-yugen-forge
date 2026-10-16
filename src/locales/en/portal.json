@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "overview": "Notifications",
+    "contracts": "Contracts",
+    "contact": "Contact"
+  },
+  "overview": {
+    "title": "Notifications",
+    "empty": "No notifications yet.",
+    "markAllRead": "Mark all as read",
+    "unread": "unread"
+  },
+  "contracts": {
+    "title": "My Contracts",
+    "empty": "You don't have any contracts yet.",
+    "viewDetails": "View Details",
+    "backToList": "← Back to Contracts",
+    "print": "Print / Save as PDF",
+    "status": "Status",
+    "amount": "Total Amount",
+    "scopeOfWork": "Scope of Work",
+    "deliverables": "Deliverables",
+    "paymentTerms": "Payment Terms",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "contractNumber": "Contract No."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Send us a message and our team will get back to you.",
+    "subjectLabel": "Subject (optional)",
+    "subjectPlaceholder": "What is this about?",
+    "messageLabel": "Message",
+    "messagePlaceholder": "How can we help?",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "sentSuccess": "Your message has been sent.",
+    "historyTitle": "Message History",
+    "empty": "No messages sent yet."
+  },
+  "changePassword": {
+    "title": "Set a New Password",
+    "subtitle": "For your security, please set a new password before continuing.",
+    "currentLabel": "Current (Temporary) Password",
+    "newLabel": "New Password",
+    "confirmLabel": "Confirm New Password",
+    "mismatch": "Passwords do not match",
+    "submit": "Update Password",
+    "updating": "Updating...",
+    "success": "Password updated. Please sign in again."
+  }
+}

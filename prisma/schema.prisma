@@ -1,0 +1,482 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum ClientStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum ProjectStatus {
+  DRAFT
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum ProjectMediaType {
+  IMAGE
+  VIDEO
+  PDF
+  FIGMA
+}
+
+enum MessageStatus {
+  NEW
+  READ
+  IN_PROGRESS
+  REPLIED
+  ARCHIVED
+}
+
+enum SettingType {
+  STRING
+  NUMBER
+  BOOLEAN
+  JSON
+}
+
+enum SettingGroup {
+  GENERAL
+  SEO
+  SOCIAL
+  CONTACT
+  INTEGRATION
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  description String?
+  users       User[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([name])
+  @@map("roles")
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  name        String           @unique
+  description String?
+  roles       RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model User {
+  id                 String        @id @default(cuid())
+  name               String
+  email              String        @unique
+  password           String
+  avatar             String?
+  status             UserStatus    @default(ACTIVE)
+  mustChangePassword Boolean       @default(false)
+  lastLogin          DateTime?
+  roleId             String
+  role               Role          @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  googleId           String?       @unique
+  authProvider       String        @default("local")
+  client             Client?
+  projects           Project[]
+  media              Media[]
+  contracts          Contract[]
+  activityLogs       ActivityLog[]
+  sessions           Session[]
+  notifications      Notification[]
+  deletedAt          DateTime?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@index([email])
+  @@index([roleId])
+  @@index([googleId])
+  @@map("users")
+}
+
+model Client {
+  id          String       @id @default(cuid())
+  userId      String       @unique
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName String
+  contactName String
+  email       String
+  phone       String
+  country     String
+  website     String?
+  notes       String?
+  status      ClientStatus @default(ACTIVE)
+  projects    Project[]
+  contracts   Contract[]
+  messages    Message[]
+  deletedAt   DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([userId])
+  @@index([email])
+  @@map("clients")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refreshToken String   @unique
+  userAgent    String?
+  ipAddress    String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([userId])
+  @@index([refreshToken])
+  @@map("sessions")
+}
+
+model Project {
+  id               String           @id @default(cuid())
+  title            String
+  titleAr          String           @default("")
+  titleEn          String           @default("")
+  slug             String           @unique
+  shortDescription String
+  shortDescriptionAr String         @default("")
+  shortDescriptionEn String         @default("")
+  description      String
+  descriptionAr    String           @default("")
+  descriptionEn    String           @default("")
+  status           ProjectStatus    @default(DRAFT)
+  category         String
+  categoryAr       String           @default("")
+  categoryEn       String           @default("")
+  type             String
+  typeAr           String           @default("")
+  typeEn           String           @default("")
+  coverImage       String
+  thumbnail        String
+  liveUrl          String?
+  repositoryUrl    String?
+  githubUrl        String?
+  figmaUrl         String?
+  seoTitle         String?
+  seoDescription   String?
+  featured         Boolean          @default(false)
+  displayOrder     Int              @default(0)
+  startDate        DateTime?
+  endDate          DateTime?
+  clientId         String?
+  client           Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  createdBy        String
+  creator          User             @relation(fields: [createdBy], references: [id], onDelete: Restrict)
+  media            ProjectMedia[]
+  contracts        Contract[]
+  deletedAt        DateTime?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([slug])
+  @@index([category])
+  @@index([status])
+  @@index([clientId])
+  @@index([createdBy])
+  @@map("projects")
+}
+
+model ProjectMedia {
+  id           String           @id @default(cuid())
+  name         String?
+  projectId    String
+  project      Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type         ProjectMediaType @default(IMAGE)
+  url          String
+  alt          String?
+  displayOrder Int              @default(0)
+  createdAt    DateTime         @default(now())
+
+  @@index([projectId])
+  @@map("project_media")
+}
+
+model Service {
+  id            String    @id @default(cuid())
+  title         String
+  titleAr       String    @default("")
+  titleEn       String    @default("")
+  description   String
+  descriptionAr String    @default("")
+  descriptionEn String    @default("")
+  icon         String
+  color        String
+  featured     Boolean   @default(false)
+  displayOrder Int       @default(0)
+  active       Boolean   @default(true)
+  messages     Message[]
+  deletedAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([displayOrder])
+  @@index([active])
+  @@map("services")
+}
+
+model PricingPlan {
+  id           String    @id @default(cuid())
+  tierAr       String
+  tierEn       String
+  price        String
+  isCustom     Boolean   @default(false)
+  descAr       String
+  descEn       String
+  featuresAr   String[]
+  featuresEn   String[]
+  featured     Boolean   @default(false)
+  displayOrder Int       @default(0)
+  active       Boolean   @default(true)
+  deletedAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([displayOrder])
+  @@index([active])
+  @@map("pricing_plans")
+}
+
+model Message {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  company   String?
+  subject   String?
+  message   String
+  serviceId String?
+  service   Service?      @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  clientId  String?
+  client    Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  budget    String?
+  status    MessageStatus @default(NEW)
+  source    String?
+  isRead    Boolean       @default(false)
+  createdAt DateTime      @default(now())
+
+  @@index([email])
+  @@index([status])
+  @@index([serviceId])
+  @@index([clientId])
+  @@index([createdAt])
+  @@map("messages")
+}
+
+model MediaFolder {
+  id        String        @id @default(cuid())
+  name      String
+  slug      String
+  parentId  String?
+  parent    MediaFolder?  @relation("FolderHierarchy", fields: [parentId], references: [id], onDelete: Cascade)
+  children  MediaFolder[] @relation("FolderHierarchy")
+  media     Media[]
+  deletedAt DateTime?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([parentId])
+  @@index([slug])
+  @@map("media_folders")
+}
+
+model Media {
+  id           String       @id @default(cuid())
+  name         String
+  originalName String       @default("")
+  extension    String       @default("")
+  hash         String       @unique
+  url          String
+  mimeType     String
+  size         Int
+  width        Int?
+  height       Int?
+  duration     Int?
+  alt          String?
+  caption      String?
+  isPublic     Boolean      @default(true)
+  folderId     String?
+  folder       MediaFolder? @relation(fields: [folderId], references: [id], onDelete: SetNull)
+  uploadedBy   String?
+  uploader     User?        @relation(fields: [uploadedBy], references: [id], onDelete: SetNull)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([folderId])
+  @@index([mimeType])
+  @@index([hash])
+  @@index([uploadedBy])
+  @@map("media")
+}
+
+model Setting {
+  id          String       @id @default(cuid())
+  key         String       @unique
+  value       String
+  type        SettingType  @default(STRING)
+  group       SettingGroup @default(GENERAL)
+  description String?
+  isPublic    Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([key])
+  @@index([group])
+  @@map("settings")
+}
+
+model HeroSection {
+  id           String   @id @default(cuid())
+  title        String
+  titleAr      String   @default("")
+  titleEn      String   @default("")
+  subtitle     String
+  subtitleAr   String   @default("")
+  subtitleEn   String   @default("")
+  buttonText   String
+  buttonTextAr String   @default("")
+  buttonTextEn String   @default("")
+  buttonLink   String
+  videoUrl     String?
+  background   String?
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("hero_sections")
+}
+
+model Testimonial {
+  id           String   @id @default(cuid())
+  name         String
+  company      String
+  position     String?
+  positionAr   String?
+  positionEn   String?
+  avatar       String?
+  rating       Int      @default(5)
+  content      String
+  contentAr    String   @default("")
+  contentEn    String   @default("")
+  featured     Boolean  @default(false)
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([displayOrder])
+  @@index([featured])
+  @@map("testimonials")
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String
+  entity    String
+  entityId  String
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("activity_logs")
+}
+
+enum NotificationType {
+  CONTRACT
+  MESSAGE
+  GENERAL
+  SYSTEM
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType @default(GENERAL)
+  title     String
+  body      String
+  link      String?
+  isRead    Boolean          @default(false)
+  createdAt DateTime         @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+  @@map("notifications")
+}
+
+enum ContractStatus {
+  DRAFT
+  SENT
+  SIGNED
+  CANCELLED
+}
+
+model Contract {
+  id                String         @id @default(cuid())
+  contractNumber    String         @unique
+  clientId          String
+  client            Client         @relation(fields: [clientId], references: [id], onDelete: Restrict)
+  projectId         String?
+  project           Project?       @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  title             String
+  scopeOfWork       String
+  deliverables      String?
+  totalAmount       Float
+  currency          String         @default("USD")
+  paymentTerms      String?
+  startDate         DateTime?
+  endDate           DateTime?
+  status            ContractStatus @default(DRAFT)
+  adminSignedName   String?
+  adminSignedAt     DateTime?
+  clientSignedName  String?
+  clientSignedAt    DateTime?
+  notes             String?
+  createdBy         String?
+  creator           User?          @relation(fields: [createdBy], references: [id], onDelete: SetNull)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([status])
+  @@map("contracts")
+}

@@ -1,0 +1,62 @@
+{
+  "hero": {
+    "eyebrow": "SOFTWARE & DIGITAL PRODUCTS",
+    "title": "Building the Digital Future",
+    "lead": "We transform ideas into extraordinary websites, applications, and digital experiences using cutting-edge AI and development technology.",
+    "stats": {
+      "projects": "Completed Projects",
+      "clients": "Global Clients",
+      "experience": "Years Experience",
+      "satisfaction": "Client Satisfaction"
+    },
+    "mockup": {
+      "revenue": "Revenue",
+      "users": "Active Users",
+      "conversion": "Conversion Rate"
+    }
+  },
+  "why": {
+    "eyebrow": "WHY YF",
+    "titlePrefix": "Why",
+    "titleHighlight": "YF",
+    "titleSuffix": " is the Right Choice",
+    "sub": "An objective comparison between traditional project execution and our approach at YF.",
+    "traditional": "TRADITIONAL",
+    "rows": {
+      "speed": ["Execution Speed", "Slow and complex", "Fast and agile with AI assistance"],
+      "design": ["Design Quality", "Ready-made templates", "100% Custom design"],
+      "support": ["Post-Launch Support", "Limited", "Continuous and long-term partnership"],
+      "ai": ["AI Integration", "Mostly absent", "Core to every project"],
+      "pricing": ["Pricing Transparency", "Unclear", "Clear packages with no surprises"]
+    }
+  },
+  "testimonials": {
+    "eyebrow": "CLIENT VOICES",
+    "titlePrefix": "What Our Clients",
+    "titleHighlight": "Say",
+    "sub": "Genuine testimonials from our success partners."
+  },
+  "pricing": {
+    "eyebrow": "INVESTMENT",
+    "titlePrefix": "Flexible & Transparent",
+    "titleHighlight": "Pricing",
+    "sub": "Choose the package that suits your project size, with full customization available.",
+    "popular": "MOST POPULAR",
+    "cta": "Start Now",
+    "sar": "SAR",
+    "custom": "Custom"
+  },
+  "process": {
+    "eyebrow": "HOW WE WORK",
+    "titlePrefix": "Clear & Thoughtful",
+    "titleHighlight": "Process",
+    "sub": "Five stages that turn your idea into a growth-ready digital product.",
+    "stages": [
+      { "title": "Discover", "desc": "We deeply understand your business, goals, and audience." },
+      { "title": "Design", "desc": "We build an experience and interface reflecting your vision." },
+      { "title": "Build", "desc": "Precise and scalable technical development." },
+      { "title": "Launch", "desc": "Smooth launch with comprehensive quality assurance." },
+      { "title": "Scale", "desc": "Continuous optimization to support your project growth." }
+    ]
+  }
+}

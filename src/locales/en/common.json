@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "process": "Process",
+    "pricing": "Pricing",
+    "contact": "Contact",
+    "startProject": "Start Project",
+    "exploreWork": "Explore Work",
+    "login": "Login",
+    "dashboard": "Dashboard"
+  },
+  "footer": {
+    "tagline": "A digital creative studio building future-forward experiences for ambitious brands.",
+    "company": "Company",
+    "services": "Services",
+    "contact": "Contact",
+    "rights": "© 2035 YF Studio. All rights reserved. License No. FL-785655331",
+    "crafted": "CRAFTED WITH PURPOSE"
+  },
+  "status": {
+    "loadingServices": "Loading services...",
+    "errorServices": "Failed to load services.",
+    "emptyServices": "No services available at the moment.",
+    "loadingPortfolio": "Loading portfolio...",
+    "errorPortfolio": "Failed to load projects.",
+    "emptyPortfolio": "No projects available at the moment.",
+    "loadingPricing": "Loading pricing...",
+    "errorPricing": "Failed to load pricing.",
+    "emptyPricing": "No pricing plans available right now."
+  },
+  "notfound": {
+    "eyebrow": "404 ERROR",
+    "titlePrefix": "Page Not Found",
+    "sub": "The page you are looking for does not exist or has been moved.",
+    "homeBtn": "Back to Home"
+  },
+  "errorBoundary": {
+    "title": "Oops, something went wrong",
+    "message": "We ran into a temporary problem loading this page. Please refresh or try again later.",
+    "reloadBtn": "Refresh Page"
+  },
+  "password": {
+    "show": "Show password",
+    "hide": "Hide password"
+  }
+}
